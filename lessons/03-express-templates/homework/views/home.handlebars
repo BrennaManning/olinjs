@@ -1,0 +1,39 @@
+<a href="/"><h1>Cat Express!</h1></a>
+
+
+{{#each listItem}}
+ <h3> {{this.option}}</h3>
+{{/each}}
+
+{{#each links}}
+<h3><a href={{this.url}}>{{this.text}}</a></h3>
+{{/each}}
+
+{{#each newcat}}
+<h2>{{this.name}}</h2>
+<h2>{{this.color}}</h2>
+<h2>{{this.age}}</h2>
+{{/each}}
+
+{{#each catarray}}
+<h2>{{this.names}}</h2>
+<h2>{{this.colors}}</h2>
+<h2>{{this.ages}}</h2>
+{{/each}}
+
+{{#each catlimit}}
+<h1>{{this.message1}}</h1>
+<h1>{{this.message2}}</h1>
+<h1>{{this.message3}}</h1>
+{{/each}}
+
+{{#each catObj}}
+<h2>Name: {{this.name}}</h2>
+<h2>Color: {{this.color}}</h2>
+<h2>Age: {{this.age}} </h2>
+<h2> - - - - - - - - - - - - - - - - - - - - - - - </h2>
+{{/each}}
+
+{{#each farewell}}
+<h3>{{this.message}}</h3>
+{{/each}}
