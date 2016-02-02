@@ -1,9 +1,13 @@
 <a href="/"><h1>Cat Express!</h1></a>
 
 
+
+
 {{#each listItem}}
  <h3> {{this.option}}</h3>
 {{/each}}
+
+
 
 {{#each links}}
 <h3><a href={{this.url}}>{{this.text}}</a></h3>
@@ -38,10 +42,4 @@
 
 {{#each farewell}}
 <h3>{{this.message}}</h3>
-{{/each}}
-
-{{#each searchResponse}}
-<h3>{{this.message}}</h3>
-<h3>{{this.catlist}}</h3>
-
 {{/each}}

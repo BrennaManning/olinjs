@@ -36,12 +36,15 @@ router.get('/', function(req, res, next) {
      {url:"/mycats", text: "View my cats"},
      {url:"/mycats/sortbycolor", text: "Sort my cats by color" },
      {url:"/mycats/sendoldesttofarm", text: "Send oldest cat to farm"},
-     {url:"/", text:"add /mycats/acolor/apersonality to the url to see cats of those traits."}
+     {url:"/mycats/gray/shy", text:"add /mycats/acolor/apersonality to the url to see cats of those traits."}
      ]
    });
 });
 
 module.exports = router;
+
+
+//MAKE A NEW CAT
 
 router.get('/mycats/new', function(req, res, next) {
 	var number0 = getRandomArbitrary(0, catNameDirectory.length -1)
@@ -57,20 +60,31 @@ router.get('/mycats/new', function(req, res, next) {
 	catName = catNameDirectory[number0];
 	catColor = catColorDirectory[number1];
 	catPersonality = catPersonalityDirectory[number2];
-	thisCat = Cat(catName, catColor, catAge, catPersonality)
+	var thisCat = Cat(catName, catColor, catAge, catPersonality)
 	myCats.push(thisCat)
 
-  res.render("home", {"newcat": [
-     {name: "Your new cat's name is " + catName},
-     {color: "Your new cat is a " + catColor + " cat"},
-     {age: "Your new cat is " + catAge + " years old"},
-     {personality: "Your cat is very " + catPersonality},
-     ]
-   });
+	var  newCatModel = new CatModel(thisCat);
+
+	newCatModel.save(function(err){
+		if(err){
+			res.send("Error")
+		}
+		else{
+			res.render("home", {"newcat":[
+				{name: "your new cat's name is " + catName},
+				{color:"Your new cat is a " + catColor + " cat"},
+				{age: "Your new cat is " + catAge + " years old"},
+				{personality: "Your cat is very " + catPersonality}
+				]
+			});
+		}
+	});
 });
 
 module.exports = router;
 
+
+//VIEW CATS
 
 router.get('/mycats', function(req, res, next) {
 	console.log(myCats)
@@ -88,10 +102,31 @@ router.get('/mycats', function(req, res, next) {
 		mycatpersonalities.push(myCats[i].personality)
 	} 
 	console.log(mycatnames);
-  res.render("home", {"catObj":myCats});
+
+	CatModel.find()
+		.exec(function (err, cats) {
+			if (err) {
+				res.status(500).send("Error could not find cat");
+			} else {
+				if (cats.length > 0) {
+					console.log(cats)
+
+				} else {
+					res.send("Cats not found")
+					
+				}
+				//res.render("home", {"searchResponse": searchResponseMessage, "cats": cats});
+				res.render("mycats", {catlist: cats});
+			}
+		});
+
+  
 });
 
 module.exports = router;
+
+
+//VIEW BY COLOR
 
 router.get('/mycats/sortbycolor', function(req, res, next) {
 	var blueCats = [];
@@ -215,27 +250,18 @@ router.get('/mycats/sendoldesttofarm', function(req, res, next){
 module.exports = router;
 
 
-/*db.inventory.find( 
-   {
-     type: 'food',
-     $or: [ { qty: { $gt: 100 } }, { price: { $lt: 9.95 } } ]
-   }
-)*/
-
+//VIEW CATS OF A GIVEN COLOR AND PERSONALITY
 
 router.get('/mycats/:color/:personality', function (req, res) {
 	var color = req.params.color;
 	var personality = req.params.personality;
-
-	
-
-	CatModel.find({$and:[{'color': color}, {personality: personality}]})
+	CatModel.find({$and:[{'color': color}, {'personality': personality}]})
 		.exec(function (err, cats) {
 			if (err) {
 				res.status(500).send("Error could not find cat");
 			} else {
 				if (cats.length > 0) {
-					searchResponseMessage = "Here are your " + color  + " cats who are " + personality + ":" 
+					searchResponseMessage = "Here are your " + color  + " cats who are " + personality
 					console.log(cats)
 
 				} else {
@@ -243,9 +269,33 @@ router.get('/mycats/:color/:personality', function (req, res) {
 					searchResponseMessage  = "You do not have any cats who are " + color  + " and " + personality
 				}
 				//res.render("home", {"searchResponse": searchResponseMessage, "cats": cats});
-				res.render("home", {"searchResponse":[
-					{message: searchResponseMessage},
-					{catlist: cats}] });
+				res.render("mycats", {catlist: cats});
+			}
+		});
+});
+
+module.exports = router;
+
+
+//VIEW CATS OF A GIVEN COLOR
+
+router.get('/mycats/:color/', function (req, res) {
+	var color = req.params.color;
+	CatModel.find({'color': color})	
+		.exec(function (err, cats) {
+			if (err) {
+				res.status(500).send("Error could not find cat");
+			} else {
+				if (cats.length > 0) {
+					searchResponseMessage = "Here are your " + color  + " cats"
+					console.log(cats)
+
+				} else {
+					//res.send("Cats not found")
+					searchResponseMessage  = "You do not have any cats who are " + color
+				}
+				//res.render("home", {"searchResponse": searchResponseMessage, "cats": cats});
+				res.render("mycats", {catlist: cats});
 			}
 		});
 });

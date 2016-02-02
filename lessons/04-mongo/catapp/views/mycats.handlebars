@@ -1,0 +1,17 @@
+
+<a href="/"><h1>Cat Express!</h1></a>
+
+
+
+{{#each response}}
+<h1>Name: {{this}}</h1>
+{{/each}}
+
+{{#each catlist}}
+<h2>Name: {{this.name}}</h2>
+<h2>Color: {{this.color}}</h2>
+<h2>Age: {{this.age}} </h2>
+<h2>Personality: {{this.personality}}</h2>
+<h2> - - - - - - - - - - - - - - - - - - - - - - - </h2>
+{{/each}}
+
