@@ -10,6 +10,7 @@ var catSchema = CatModel.catSchema;
 /* GET home page. */
 
 //function that constructs and returns cat object
+//Fun fact! You can use some fancy new syntax to create this with less typing {name, color, age, personality} === {name:name, color:color, age:age, personality:personality}. With that syntax you probalby don't even to a function. Be careful using that on the client though cause it won't be supported in older broswers. (I'm looking at you IE)
 function Cat(name, color, age, personality){
   var cat= {
     name: name,
@@ -47,6 +48,7 @@ module.exports = router;
 //MAKE A NEW CAT
 
 router.get('/mycats/new', function(req, res, next) {
+	// These names aren't very clear
 	var number0 = getRandomArbitrary(0, catNameDirectory.length -1)
 	number0 = Math.floor(number0);
 	var number1 = getRandomArbitrary(0, 9)
@@ -61,6 +63,7 @@ router.get('/mycats/new', function(req, res, next) {
 	catColor = catColorDirectory[number1];
 	catPersonality = catPersonalityDirectory[number2];
 	var thisCat = Cat(catName, catColor, catAge, catPersonality)
+	//You shouldn't try and keep a local copy of the database in a variable. This is pretty space inefficient and it will get deleted when ever the server restarts :/ When ever you are using myCats or you cat myCats based variables, you should be doing a CatModel.find()
 	myCats.push(thisCat)
 
 	var  newCatModel = new CatModel(thisCat);
@@ -141,6 +144,7 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 	var yellowCats = [];
 
 	for(i=0;i < myCats.length; i++){
+		//You should really use your database to find these! myCats gets deleted each time the server restarts but your database will persist. Its kinda what is there for
 		if(myCats[i].color == "blue"){
 			blueCats.push(myCats[i]);
 		} else if(myCats[i].color == "black"){
@@ -205,9 +209,12 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 module.exports = router;
 
 catquantity = myCats.length
+//its nice to have semi colons after each line. It make compresssing your code later on way easier
 var messagetext1 = "" 
 var messagetext2 = "" 
 var messagetext3 = "" 
+// You could /n to add a line break in you string instead of having three variables
+
 if (catquantity > 20){
 	messagetext1 = "It is irresponsible to own more than 20 cats"
 	messagetext2 = "You cannot give each of them the love and attention they need"
