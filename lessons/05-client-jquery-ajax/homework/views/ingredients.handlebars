@@ -1,0 +1,83 @@
+<a href = "/" ><h1>Jessica's Burgers </h1> </a>
+
+<!-- <h2>Add Ingredient (GET)</h2>
+<form action="getIngredient" method="GET">
+  Name: <input type="text" name="name"/><br/>
+  Price: <input type="text" name="price" /><br/> 
+  <input type="submit" value="Submit">
+</form>
+
+<h2>Add Ingredient (POST)</h2>
+<form action="getIngredient" method="POST">
+  Name: <input type="text" name="name"/><br/>
+  Price: <input type="text" name="price"/><br/>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>Add Ingredient (AJAX)</h2>
+<form id="ajax-form" action="getIngredient" method="POST">
+  Name: <input type="text" name="name"/><br/>
+  Price: <input type="text" name="price"/><br/>
+  <input type="submit" value="Submit">
+</form>
+<div id="result">  
+</div>  -->
+
+<h2>Add New Ingredient POST request</h2>
+<form action="getIngredient" method="POST">
+  Price: $<input type="text" name="price"/><br/>
+  Ingredients: <br>
+  <input type="radio" name="name" value="bun" checked/>Bun<br/>
+  <input type="radio" name="name" value="cheese"/>Cheese<br/>
+  <input type="radio" name="name" value="beefPatty"/>Beef Patty<br/>  
+  <input type="radio" name="name" value="tomato"/>Tomato<br/>
+  <input type="radio" name="name" value="lettuce"/>Lettuce<br/>
+  <input type="radio" name="name" value="onion"/>Onion<br/>
+  <input type="radio" name="name" value="ketchup"/>Ketchup<br/>
+  <input type="radio" name="name" value="mushroom"/>Mushroom<br/>
+  <input type="radio" name="name" value="avacado"/>Avacado<br/>
+  <input type="radio" name="name" value="bacoon"/>Bacon<br/>
+  <input type="radio" name="name" value="secretSauce"/>Secret Sauce<br/>
+  Other: <input type="text" name="name"/> <br/>
+  
+  <input type="submit" value="Submit">
+</form>
+
+
+{{#each newIngredient}}
+<h3>{{this.name}}</h3>
+{{/each}}
+
+<h3>In Stock</h3>
+<div id="in">
+  {{#each inStock}}
+    <form class="inStock" id={{this._id}} action="outOfStock" method="POST">
+      <span>{{this.name}}  -  ${{this.price}}</span>
+      <input type="button" class="edit" value="Edit">
+      <input type="submit" class="submit" value="Out of Stock">
+    </form>
+  {{/each}}
+</div>
+
+<h3>Out Of Stock</h3>
+<div id="out">
+  {{#each outOfStock}}
+    <form class="outOfStock" id={{this._id}} action="inStock" method="POST">
+      <span>{{this.name}} - ${{this.price}}</span>
+      <input type="button" class="edit" value="Edit">
+      <input type="submit" class="submit" value="Restock">
+    </form>
+  {{/each}}
+</div>
+
+<h3>New Ingredient</h3>
+<div id="new">
+  <form id="newIngredient" action="addIngredient" method="POST">
+    Ingredient: <input type="text" id="name">
+    Price: $<input type="text" id="price">
+    <input type="submit" class="submit" value="Add">
+  </form>
+</div>
+
+
+
