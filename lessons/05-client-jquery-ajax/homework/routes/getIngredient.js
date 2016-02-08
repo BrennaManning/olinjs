@@ -52,9 +52,8 @@ routes.getIngredientPOST = function(req, res) {
 //}
 
 routes.ingredients = function(req, res) {
- //query for all ingredients, separate by availability, and render
   IngredientModel.find({}, function(err, data) {
-    // separate in stock & out of stock
+   
     var inStockData = [];
     var outStockData = [];
     data.forEach(function(ingredient) {
@@ -62,36 +61,31 @@ routes.ingredients = function(req, res) {
       list.push(ingredient);
     });
 
-    // package data and render
-
     var sortedData = {'inStock':inStockData, 
              'outOfStock':outStockData}; 
-    //var hbsData = {'inStock':formatPrice(inData), 
-    //         'outOfStock':formatPrice(outData)};
+
     res.render('ingredients', sortedData);
   });
-
-  
 }
 
 
 routes.outOfStock = function(req, res) {
-// mark an ingredient out of stock
+
   var _id = req.body.id;
-  IngredientModel.update({'_id':_id}, {'inStock':false}, function(err, num, data) {
-    res.end(_id);
-  });
+ // IngredientModel.update({'_id':_id}, {'inStock':false}, function(err, num, data) {
+  //  res.end(_id);
+
+  IngredientModel.update({'_id':_id}, {"$set" : {"array.$.inStock" : false}})  
+  //});
 }
 
 routes.inStock = function(req, res) {
-// mark an ingredient in stock
   var _id = req.body.id;
   IngredientModel.update({'_id': _id}, {'inStock':true}, function(err, num, data) {
     res.end(_id);
   });
 }
 routes.editIngredient = function(req, res) {
-// mark an ingredient in stock
   var _id = req.body.id;
   IngredientModel.update({'_id': _id}, {'name':ingredientParams.name, 'price': ingredientParams.price}, function(err, num, data) {
     res.end(_id);
@@ -107,6 +101,7 @@ function Edit(ingredient){
             if(err) throw err;
         });
 }
+
 
 
 module.exports = routes;

@@ -1,0 +1,15 @@
+<a href = "/" ><h1>Jessica's Burgers </h1> </a>
+
+
+<h2> The Kitchen! </h2>
+<ul>
+    {{#each orders}}
+        <li class="orders {{_id}}">{{name}}: <button type="button" class="complete-btn" id={{_id}}>Completed</button>
+            <ul>
+                {{#each this.ingredients}}
+                    <li>{{this}}
+                {{/each}} 
+            </ul>
+        </li>
+    {{/each}}
+</ul>

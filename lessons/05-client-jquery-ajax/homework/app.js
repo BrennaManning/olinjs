@@ -6,6 +6,8 @@ var bodyParser = require("body-parser");
 var exphbs  = require("express-handlebars");
 var index = require("./routes/index");
 var getIngredient = require("./routes/getIngredient");
+var myOrders = require("./routes/orders");
+var kitchen = require("./routes/kitchen");
 var mongoose = require("mongoose");
 var app = express();
 
@@ -24,8 +26,10 @@ app.post("/getIngredient", getIngredient.getIngredientPOST);
 app.post("/getIngredient", getIngredient.getIngredientPOST);
 app.get('/ingredients', getIngredient.ingredients);
 app.post('/outOfStock', getIngredient.outOfStock);
-//app.get('/order', index.order);
-//app.get('/kitchen', index.kitchen);
+app.get('/orders', myOrders.orders);
+app.post('/order/recieved', myOrders.submitted);
+//app.post("orderSubmitted, ")
+app.get('/kitchen', kitchen.showOrders);
 
 
 mongoose.connect(process.env.MONGOURI || 'mongodb://localhost/test');
