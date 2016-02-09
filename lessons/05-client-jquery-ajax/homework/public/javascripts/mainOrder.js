@@ -7,8 +7,6 @@ var onSuccess = function (data, status) {
     if (!data) {
         alert("Error!");
     } else {
-        //$orderForm.css('display', 'none');
-        $('#orderMessage').html('Your order has been placed!');
         console.log("Your order has been placed!");
     }
 }
@@ -58,18 +56,3 @@ $.get("orders", formData)
     .done(onSuccess)
     .error(onError);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

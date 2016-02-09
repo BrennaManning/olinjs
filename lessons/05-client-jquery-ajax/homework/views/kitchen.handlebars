@@ -2,6 +2,9 @@
 
 
 <h2> The Kitchen! </h2>
+	{{#each message}}
+        {{this.message}}
+  	{{/each}} 
 <ul>
     {{#each orders}}
         <li class="orders {{_id}}">{{name}}: <button type="button" class="complete-btn" id={{_id}}>Completed</button>
@@ -12,4 +15,7 @@
             </ul>
         </li>
     {{/each}}
+
+
+
 </ul>
