@@ -21,14 +21,7 @@ var getIngredient = function(ingredientParams, absolute) {
     if(err){
       res.status(500).send("Error")
     }
-    //else{
-    //  res.render("ingredients", {"newIngredient":[
-    //    {name: ingredientParams.name},
-    //    {price: ingredientParams.price},
-    //    {quantity: ingredientParams.quantity}
-    //    ]
-    //  });
-    //}
+    
   return newIngredient;
 })
 }

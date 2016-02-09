@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Requests --> that are handled by the methods avialable in index.js, getIngredient.js and myOrders.js
 app.get("/", index.home);
 app.get("/getIngredient", getIngredient.getIngredientGET);
 app.post("/getIngredient", getIngredient.getIngredientPOST);

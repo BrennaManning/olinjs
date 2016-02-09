@@ -102,11 +102,15 @@ routes.submitted = function (req, res) {
     order.ingredients = order["ingredients[]"];
     console.log(order.ingredients);
     order.completed = false;
-    var newOrder = OrderModel(order);
+    var newOrder = new OrderModel(order);
     newOrder.save(function (err) {
         if (err) console.log("problem saving order " + err);
     });
-    res.send(newOrder);
+   // res.send(newOrder);
+    res.render('orders', newOrder);
+    console.log('new order = ' + newOrder)
+
+
 }
 
 

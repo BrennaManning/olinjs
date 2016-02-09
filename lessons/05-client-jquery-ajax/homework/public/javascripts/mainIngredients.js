@@ -5,7 +5,7 @@ var onSuccess = function(data, status) {
    if (!data) {
         alert("Error!");
     } else {  
-    $("#result").html;));
+    $("#result").html();
     }
 
 };
@@ -31,16 +31,15 @@ $form.submit(function(event) {
     inStock: inStock
   }
 
-});
   $.get("getIngredient", formData)
     .done(onSuccess)
     .error(onError);
-});
+
+})
 
 
 ////////////////////////////////////////////////
- console.log("mainOrderjs0");
-var $order = $("form.orderForm");
+/*var $order = $("form.orderForm");
 var $ingredients = $("input.ingredients");
 
 
@@ -92,26 +91,13 @@ $ingredients.click(function () {
     var total = $price.html();
     var checkedValue = $(checkbox).is(':checked') ? checkbox.value : -checkbox.value;
     $price.html((Number(total) + Number(checkedValue)).toFixed(2));
-});
+
 
  console.log("mainOrderjs5");
 
 
-$.get("orders", formData)
-    .done(onSuccess)
-    .error(onError);
+  $.get("orders", formData)
+      .done(onSuccess)
+      .error(onError);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/

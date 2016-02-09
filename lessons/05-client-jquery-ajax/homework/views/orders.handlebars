@@ -6,9 +6,10 @@
 		
 		What is your name: <input type = "text" name = "customerName"></input>
 		<h3>Build your personalized burger out of these available ingredients!</h3>
- 		{{#each inStock}}
+ 	
+    	{{#each inStock}}
     		<p class="options">
-    		<input type = "checkbox" name = {{this.name}} value = {{this.price}}>
+    		<input type = "checkbox" name = {{this.name}} value = {{this.price}} onclick='handleClick(this);'>
     		<span>{{this.name}}  -  ${{this.price}}</span></p></input>
     		<!--{{this.price}} 
     		ingredientSelected = {{this.name}} -->
@@ -16,7 +17,14 @@
      		
      		
      	{{/each}}
+         <input type="submit" class="submit" value="Order" >
     </form>
 
-  <input type="submit" class="submit" value="Order">
+
+
+ 
 </div>
+
+{{#each newOrder}}
+    <h3>{{this.name}} {{this.ingredients}} {{this.cost}} </h3>
+{{/each}}

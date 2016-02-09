@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var orderSchema = mongoose.Schema({
 	'customerName': String,
     'ingredients': [String],
-    'itemPrice': [Number],
+    'totalCost': Number,
     'completed': Boolean
 });
 
