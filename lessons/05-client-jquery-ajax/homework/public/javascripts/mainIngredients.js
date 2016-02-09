@@ -1,8 +1,51 @@
+var $form = $("#ajax-form");
+
+var onSuccess = function(data, status) {
+ //var img = "<img src='"+data+"'/>";
+   if (!data) {
+        alert("Error!");
+    } else {  
+    $("#result").html;));
+    }
+
+};
+
+var onError = function(data, status) {
+  console.log("status", status);
+  console.log("error", data);
+};
+
+$form.submit(function(event) {
+  event.preventDefault();
+  formData = $form.serialize();
+
+  var name = $form.find("[name='name']").val();
+  var price = $form.find("[name='price']").val();
+  var inStock = $form.find("[name='inStock']").val();  
+  var customerName = $form.find("[name='customerName']").val(); 
+  var price = $form.find("[value ='customerName']").val();
+
+  formData = {
+    name: name,
+    price: price,
+    inStock: inStock
+  }
+
+});
+  $.get("getIngredient", formData)
+    .done(onSuccess)
+    .error(onError);
+});
+
+
+////////////////////////////////////////////////
  console.log("mainOrderjs0");
 var $order = $("form.orderForm");
 var $ingredients = $("input.ingredients");
 
-var onSuccess = function (data, status) {
+
+
+var onSuccessOrder = function (data, status) {
   console.log("mainOrderjs1");
     if (!data) {
         alert("Error!");
@@ -13,7 +56,7 @@ var onSuccess = function (data, status) {
     }
 }
 
-var onError = function(data, status) {
+var onErrorOrder = function(data, status) {
    console.log("mainOrderjs2");
   console.log("status", status);
   console.log("error", data);
@@ -58,7 +101,6 @@ $.get("orders", formData)
     .done(onSuccess)
     .error(onError);
 });
-
 
 
 

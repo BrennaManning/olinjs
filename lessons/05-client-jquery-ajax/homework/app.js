@@ -27,7 +27,7 @@ app.post("/getIngredient", getIngredient.getIngredientPOST);
 app.get('/ingredients', getIngredient.ingredients);
 app.post('/outOfStock', getIngredient.outOfStock);
 app.get('/orders', myOrders.orders);
-app.post('/order/recieved', myOrders.submitted);
+app.post('/orders/recieved', myOrders.submitted);
 //app.post("orderSubmitted, ")
 app.get('/kitchen', kitchen.showOrders);
 
