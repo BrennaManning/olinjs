@@ -1,0 +1,38 @@
+html{
+	height: 100%;
+}
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1{
+	padding: 40px;
+	border: 1px;
+	margin-top: 0px;
+	font-family: 'Open Sans', sans-serif;
+	font: 50px;
+	font-weight: 700;
+	background: #00A3CC;
+	color: white;
+}
+
+h3{
+	padding: 30px;
+	border: 0px;
+	margin-top: 0px;	
+	font-family: 'Open Sans', sans-serif;
+	font-weight:400;
+	background: #00A3CC;
+	color: white;
+}
+
+head{
+	margin-top:0px;
+
+}
