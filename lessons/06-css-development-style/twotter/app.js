@@ -30,14 +30,11 @@ app.use(session({
   cookie: {}
 }));
 
-
-
-
-
 app.get('/', index.login);
 app.post('/authenticate', index.authenticate);
 app.get('/twotterfeed', index.twotterfeed);
-
+app.post('/twote', index.twote);
+app.post('/deletetwotes', index.deletetwotes);
 
 
 var PORT = process.env.PORT || 3000;
