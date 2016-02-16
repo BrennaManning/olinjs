@@ -6,7 +6,10 @@ var routes = {};
 
 routes.login = function(req, res){
 	res.render('home', {'message':'Welcome to twotter. Who are you?'});
+
+
 }
+
 
 routes.authenticate = function(req, res){
 	User.find({name: req.body.name})

@@ -66,6 +66,19 @@ $deleteButton.click(
 	}
 );
 
+
+FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    console.log(response.authResponse.accessToken);
+    loggedInUser = authresponse.userid;
+    console.log("loggedInUser "+ loggedInUser)
+
+  }
+});
+FB.api('/me', function(response) {
+    console.log(JSON.stringify(response));
+});
+
 /*
 $deleteButton.on("click", $deleteButton, function() {
     alert('Removing all twotes by ' + $currentUserName);
@@ -86,3 +99,5 @@ $deleteButton.on("click", $deleteButton, function() {
 
    		
 });*/
+
+

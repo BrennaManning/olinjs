@@ -11,6 +11,8 @@ var session = require('express-session')
 var app = express();
 
 
+
+
 mongoose.connect(process.env.MONGOURI || 'mongodb://localhost/test');
 // view engine setup
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
