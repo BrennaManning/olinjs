@@ -146,3 +146,21 @@ div.bottom
 			font-weight: 700;
 			color: white;
         }
+
+.button {
+   background: #00A3CC;
+   padding: 6px 12px;
+   border-radius: 18px;
+   color: #ffffff;
+   font-size: 12px;
+   font-family: 'Open Sans', sans-serif;
+   vertical-align: middle;
+   }
+.button:hover {
+   background: #008FB2;
+   color: #ffffff;
+   }
+.button:active {
+   background: #007793;
+}
+

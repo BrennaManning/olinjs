@@ -6,7 +6,7 @@ var $loginForm = $('#login-form');
 var $userInList = $('.user-in-list');
 var $userToHighlight;
 var $currentUserTwotes;
-var $deleteButton = $('.delete-button');
+var $deleteButton = $('#delete-button');
 
 
 var error = function(data, status){
