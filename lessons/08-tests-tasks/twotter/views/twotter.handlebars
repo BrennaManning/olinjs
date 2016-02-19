@@ -1,0 +1,27 @@
+<div class = "blue"><div class="top"> <div style = "float: left; width: 58%;" id = "header"><h1>twotter.  Welcome {{this.name}}   <img src="images/birdflipped.png" alt="bird image" style="width:35px;height:35px;"> <h1></div> <div style = "float: right; width = 42%;" class="logout"> <div style = "float: left; width: 40%;">Not <div class = "current-user-name">{{this.name}}?</div></div><a href = "\" style="float: right; width=60%;"><img src="images/logout.png" alt="bird image" style="width:30px;height:30px;"> Log Out</a></div> </div>
+<!-- <h3> {{message}} <h<div class="top"> 3> -->
+
+<div class="twoteform" style = "float:left; width: 100%">
+	<form id="twote-post-form" method="POST" action="twote">
+		<h3>  what is on your mind? : <input id = "twote"  type="text" name="text"/>  <input type="submit" value="post my twote" class = button></h3>
+	</form>
+</div>
+<div class="my-delete-button" style = "float: left; width = 100%;"><button type="button" class = "button" id = "delete-button">delete my twotes</button></div>
+</div>
+<br>
+
+<div id = "twotelist"  style = "float: left; width: 55%;" >
+	{{#each twote}}
+		<div class = "eachtwote {{this.user}}">
+			<h2>{{this.user}}</h2>
+			<p>{{this.text}}</p>
+		</div>
+	{{/each}}
+</div>
+
+<div class = "userlist"   style = "float: right; width: 40%;">
+<h2> Our Twotter Users </h2>
+{{#each userlist}}
+	<h4 class = "user-in-list">{{this.name}}</h4> 
+{{/each}}
+</div>

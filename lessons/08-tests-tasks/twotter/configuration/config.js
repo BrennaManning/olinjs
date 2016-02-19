@@ -1,0 +1,15 @@
+module.exports={
+  "facebook_api_key"      :     "FB APP ID",
+  "facebook_api_secret"   :     "FB API SECRET",
+  "callback_url"          :     "http://localhost:3000/auth/facebook/callback",
+  "use_database"          :     "false",
+  "host"                  :     "localhost",
+  "username"              :     "root",
+  "password"              :     "",
+  "database"              :     "DB NAME",
+  'facebookAuth' : {
+        'clientID'      : 175209702853628, // your App ID
+        'clientSecret'  : 'b5795edabb9abec986c6d6e3b8b0dbaf', // your App Secret
+        'callbackURL'   : 'http://localhost:8080/auth/facebook/callback'
+    },
+}
