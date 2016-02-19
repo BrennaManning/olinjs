@@ -5,7 +5,7 @@ var Twote = require('./../models/twoteModel.js');
 var routes = {};
 
 routes.login = function(req, res){
-	res.render('home', {'message':'Welcome to twotter. Who are you?'});
+	res.render('home');
 
 
 }
@@ -16,8 +16,10 @@ routes.authenticate = function(req, res){
 		.exec(function(err, userswithname){
 			if(userswithname.length == 0){
 				var user = new User(req.body);
+				console.log ('password' + user.password)
 
 				req.session.username = user.name
+				req.session.password = user.password
 				//console.log(username)
 				user.save(function(err) {
 					//console.log('username:' + username)
@@ -27,8 +29,21 @@ routes.authenticate = function(req, res){
 				console.log(req.session.username)
 			}
 			else{
-				req.session.username = userswithname[0].name;	
-				res.redirect('/twotterfeed');			
+				req.session.password = req.body.password
+				req.session.username = userswithname[0].name;
+				console.log ('req.session.password' + req.session.password);
+				console.log ('password:' + userswithname[0].password);
+
+				if (req.session.password == userswithname[0].password){
+					console.log("Password approved - redirecting");
+					res.redirect('/twotterfeed');	
+				}
+				else{
+					console.log("WRONG");
+					res.render('home', {'message': 'incorrect username or password'});
+				}
+				
+				
 			}
 		})
 	

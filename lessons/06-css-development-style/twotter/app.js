@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var app = express();
 
-
+//var fbAuth = require('./authentication.js');
 
 
 mongoose.connect(process.env.MONGOURI || 'mongodb://localhost/test');
@@ -38,6 +38,13 @@ app.get('/twotterfeed', index.twotterfeed);
 app.post('/twote', index.twote);
 app.post('/deletetwotes', index.deletetwotes);
 
+
+
+//app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){});
+//app.get('/auth/facebook/callback',
+//    passport.authenticate('facebook', { successRedirect: '/twotterfeed',
+//                                        failureRedirect: '/' })
+//);
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
