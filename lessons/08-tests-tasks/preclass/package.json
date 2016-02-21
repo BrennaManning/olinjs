@@ -1,4 +1,7 @@
 {
+   "watch": {
+    "test": "{src,test}/*.js"
+  },
   "name": "project",
   "version": "1.0.0",
   "description": "",
@@ -8,7 +11,9 @@
     "mocha": "./node_modules/mocha/bin/mocha tests/server",
     "cover-mocha": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha tests/server -- -R spec",
     "test": "npm run karma && npm run cover-mocha",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "tape test/*.js",
+    "watch": "npm-watch"
   },
   "author": "Evan Dorsky",
   "license": "ISC",
