@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "jshint": "jshint --exclude-path ./.gitignore . || exit 0",
+    "mocha": "./node_modules/mocha/bin/mocha tests/server --recursive || exit 0",
+    "cover-mocha": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha tests/server -- --recursive -R spec || exit 0",
+    "test": "npm run cover-mocha",
+    "watch": "npm-watch"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -22,6 +27,11 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "jshint": "^2.9.1"
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0",
+    "jshint": "^2.9.1",
+    "karma-mocha": "^0.2.2",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
   }
 }

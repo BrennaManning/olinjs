@@ -9,28 +9,28 @@ routes.login = function(req, res){
 	res.render('home');
 
 
-}
+};
 
 
 routes.authenticate = function(req, res){
 	User.find({name: req.body.name})
 		.exec(function(err, userswithname){
-			if(userswithname.length == 0){
+			if(userswithname.length === 0){
 				var user = new User(req.body);
-				console.log ('password' + user.password)
+				console.log ('password' + user.password);
 
-				req.session.username = user.name
-				req.session.password = user.password
+				req.session.username = user.name;
+				req.session.password = user.password;
 				//console.log(username)
 				user.save(function(err) {
 					//console.log('username:' + username)
 					//users.pop(req.session.username);
 					res.redirect('/twotterfeed');		
 				});
-				console.log(req.session.username)
+				console.log(req.session.username);
 			}
 			else{
-				req.session.password = req.body.password
+				req.session.password = req.body.password;
 				req.session.username = userswithname[0].name;
 				console.log ('req.session.password' + req.session.password);
 				console.log ('password:' + userswithname[0].password);
@@ -42,13 +42,13 @@ routes.authenticate = function(req, res){
 				else{
 					console.log("WRONG");
 					res.render('home', {'message': 'incorrect username or password'});
-				}
+				};
 				
 				
-			}
-		})
+			};
+		});
 	
-}
+};
 
 routes.deletetwotes = function(req, res){
 	//db.twotes.remove( { user: $currentUserName}, true )
@@ -58,19 +58,19 @@ routes.deletetwotes = function(req, res){
 		.exec(function(err, user){
 			var currentUserObj = {
 				name: req.session.username
-			} 
+			} ;
 			res.send(currentUserObj);
 
 
-		})
+		});
 	//res.redirect('/twotterfeed');		
 	
 	
-}
+};
 
 routes.twotterfeed = function(req, res){
 	
-	var users
+	var users;
 	console.log('rendering');
 	console.log('twotterfeedroute:');
 	//console.log(users)
@@ -110,11 +110,11 @@ routes.twotterfeed = function(req, res){
 						res.render("loggedout", {
 							message: "please log in to use twotter"
 						});
-					}
-				}			
-			})
-		}			
-	})
+					};
+				};		
+			});
+		};			
+	});
 
 
 };
@@ -142,7 +142,7 @@ routes.twote = function(req, res){
 		res.redirect('/twotterfeed');		
 	});
 	
-}
+};
 
 
 
