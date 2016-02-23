@@ -4,6 +4,13 @@ var routes = {};
 var ingredientText;
 
 function IngredientConstructor(name, price, inStock){
+  /* I bet you could even make this function return Mongoose ingredientmodels -- something like
+     return new IngredientModel({
+       name: name,
+       price: price,
+       inStock: inStock
+     });
+   */
   var thisIngredientObj= {
     name: name,
     price: price,
@@ -13,18 +20,17 @@ function IngredientConstructor(name, price, inStock){
 }
 
 var getIngredient = function(ingredientParams, absolute) {
-  //var ingredientText;
-  ingredientText = ingredientParams.name + "     $" + ingredientParams.price;
-  console.log(ingredientText);
+  var ingredientText = ingredientParams.name + "     $" + ingredientParams.price;
   var newIngredient = new IngredientModel(IngredientConstructor(ingredientParams.name, ingredientParams.price, ingredientParams.inStock=true));
-    newIngredient.save(function(err){
+  newIngredient.save(function(err){
     if(err){
-      res.status(500).send("Error")
+      res.status(500).send("Error"); // nice error handling :)
     }
-    
-  return newIngredient;
-})
-}
+
+    return newIngredient;
+  });
+};
+// IngredientConstruct and getIngredient look great!
 
 
 routes.getIngredientGET = function(req, res) {
@@ -46,20 +52,21 @@ routes.getIngredientPOST = function(req, res) {
 
 routes.ingredients = function(req, res) {
   IngredientModel.find({}, function(err, data) {
-   
+
     var inStockData = [];
     var outStockData = [];
     data.forEach(function(ingredient) {
-      var list = ingredient.inStock ? inStockData : outStockData;
+      var list = ingredient.inStock ? inStockData : outStockData; // nice ternary logic!
       list.push(ingredient);
     });
 
-    var sortedData = {'inStock':inStockData, 
-             'outOfStock':outStockData}; 
-
-    res.render('ingredients', sortedData);
+    res.render('ingredients', {
+      'inStock': inStockData,
+      'outOfStock': outStockData
+    }); // I kind of like declaring objects inline like this -- nice little space-saving trick. Up to you though :)
   });
-}
+};
+// this handler looks great too.
 
 
 routes.outOfStock = function(req, res) {
@@ -68,7 +75,7 @@ routes.outOfStock = function(req, res) {
  // IngredientModel.update({'_id':_id}, {'inStock':false}, function(err, num, data) {
   //  res.end(_id);
 
-  IngredientModel.update({'_id':_id}, {"$set" : {"array.$.inStock" : false}})  
+  IngredientModel.update({'_id':_id}, {"$set" : {"array.$.inStock" : false}})
   //});
 }
 
