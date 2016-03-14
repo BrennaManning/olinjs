@@ -1,0 +1,99 @@
+<!-- <!doctype html> -->
+
+<!-- ANGULAR MODULE -->
+<html ng-app="myTodo">
+<head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To Do</title>
+
+    <!-- BOOTSTRAP TEMPLATES ETC -->
+    <link rel="stylesheet" href="///netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+      
+    <style>
+        body                    { padding-top:100px; }
+        #todo-list              { margin-bottom:50px; }
+        .strike                 { text-decoration: line-through; }
+        .todotask               {font-size: 40;}
+        input[type=checkbox]    {-ms-transform: scale(3); /* IE */-moz-transform: scale(3); /* FF */ -webkit-transform: scale(3); /* Safari and Chrome */-o-transform: scale(3); /* Opera */padding: 20px;}
+        .clear                  {opacity: 0;}
+
+
+    </style> 
+
+    <!--JQUERY-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <!--ANGULAR-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+    <!--ANGULAR CONTROLLER-->
+    <script src="controller.js"></script>
+
+</head>
+<body ng-controller="mainController">
+    <div class="container">
+
+        <!-- HEADER-->
+        <div class="jumbotron text-center">
+          <h1> What do you need to do today?</h1>
+        </div>
+        <h1>Things to Do: <span class="label label-info">{{todos.length }} </span> </h1>
+        <br>
+        <p></p>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="myFilter=null">View All Tasks</button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="myFilter={done:'false'}">Active</button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="myFilter={done:'true'}">Completed</button>
+        <br>
+        <p></p>
+        <p></p>
+        <!-- TODO LIST -->
+        <div id="todo-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="checkbox item" ng-repeat="todo in todos | filter: myFilter"  >
+                    <div ng-class="{strike: todo.done}" class="todotask">
+                        <label>
+                            {{ todo.text }}  <span class = "clear">__</span> <input type="checkbox" ng-model="completed" ng-disabled="todo.done" ng-checked="todo.done" ng-click="completeTask(todo._id, $index)" >                          
+
+                        </label>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg text-center" placeholder="{{todo.text}}" ng-model="editData[$index]">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="editTask(todo._id, $index)">Submit Edit</button>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="deleteTask(todo._id)">Delete</button>
+                    </form>
+                    <form> 
+                        <div class="form-group">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">                     
+                        <input type="text" class="form-control input-lg text-center" placeholder="Type Task Here" ng-model="formData.text">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="addTask()">Add to List</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

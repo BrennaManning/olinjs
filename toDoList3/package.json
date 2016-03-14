@@ -1,0 +1,29 @@
+{
+  "name"         : "ToDoApp",
+  "author"       : "BrennaManning",
+  "version"      : "0.0.1",
+  "description"  : "OlinJS Lesson 09 Homework",
+  "main"         : "app.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "express"    : "~4.7.2",
+    "mongoose"   : "~4.4.4",
+    "morgan"     : "~1.2.2",
+    "body-parser": "~1.5.2",
+    "method-override": "~2.1.2"
+    },
+
+  "engines": {
+    "node": "0.10.x"
+  },
+
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "scripts"      : {
+    "start": "node app.js"
+  } 
+}
+
+
