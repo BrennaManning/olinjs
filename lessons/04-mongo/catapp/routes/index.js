@@ -10,6 +10,8 @@ var catSchema = CatModel.catSchema;
 /* GET home page. */
 
 //function that constructs and returns cat object
+
+//Fun fact! You can use some fancy new syntax to create this with less typing {name, color, age, personality} === {name:name, color:color, age:age, personality:personality}. With that syntax you probalby don't even to a function. Be careful using that on the client though cause it won't be supported in older broswers. (I'm looking at you IE)
 function Cat(name, color, age, personality){
   var cat= {
     name: name,
@@ -47,6 +49,7 @@ module.exports = router;
 //MAKE A NEW CAT
 
 router.get('/mycats/new', function(req, res, next) {
+	// These names aren't very clear
 	var number0 = getRandomArbitrary(0, catNameDirectory.length -1)
 	number0 = Math.floor(number0);
 	var number1 = getRandomArbitrary(0, 9)
@@ -61,6 +64,7 @@ router.get('/mycats/new', function(req, res, next) {
 	catColor = catColorDirectory[number1];
 	catPersonality = catPersonalityDirectory[number2];
 	var thisCat = Cat(catName, catColor, catAge, catPersonality)
+	//You shouldn't try and keep a local copy of the database in a variable. This is pretty space inefficient and it will get deleted when ever the server restarts :/ When ever you are using myCats or you cat myCats based variables, you should be doing a CatModel.find()
 	myCats.push(thisCat)
 
 	var  newCatModel = new CatModel(thisCat);
@@ -89,7 +93,7 @@ module.exports = router;
 router.get('/mycats', function(req, res, next) {
 	console.log(myCats)
 	console.log(myCats.length)
-	
+
 	var mycatcolors = []
 	var mycatages = []
 	var mycatnames = []
@@ -100,7 +104,7 @@ router.get('/mycats', function(req, res, next) {
 		mycatcolors.push(myCats[i].color)
 		mycatages.push(myCats[i].age)
 		mycatpersonalities.push(myCats[i].personality)
-	} 
+	}
 	console.log(mycatnames);
 
 	CatModel.find()
@@ -113,14 +117,14 @@ router.get('/mycats', function(req, res, next) {
 
 				} else {
 					res.send("Cats not found")
-					
+
 				}
 				//res.render("home", {"searchResponse": searchResponseMessage, "cats": cats});
 				res.render("mycats", {catlist: cats});
 			}
 		});
 
-  
+
 });
 
 module.exports = router;
@@ -141,12 +145,17 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 	var yellowCats = [];
 
 	for(i=0;i < myCats.length; i++){
+		//You should really use your database to find these!
+		// you could do all of this with
+		// CatModel.find().sort({color:-1}).exec(function (err, cats){
+		//	 res.render("home", {catObj:cats});
+		//})
 		if(myCats[i].color == "blue"){
 			blueCats.push(myCats[i]);
 		} else if(myCats[i].color == "black"){
 			blackCats.push(myCats[i]);
 		} else if(myCats[i].color == "brown"){
-			brownCats.push(myCats[i]); 
+			brownCats.push(myCats[i]);
 		} else if (myCats[i].color == "gray"){
 			grayCats.push(myCats[i]);
 		} else if (myCats[i].color == "green"){
@@ -154,7 +163,7 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 		} else if(myCats[i].color == "orange"){
 			orangeCats.push(myCats[i]);
 		} else if(myCats[i].color == "purple"){
-			purpleCats.push(myCats[i]); 
+			purpleCats.push(myCats[i]);
 		} else if (myCats[i].color == "red"){
 			redCats.push(myCats[i]);
 		} else if (myCats[i].color == "white"){
@@ -162,8 +171,9 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 		} else if (myCats[i].color == "yellow"){
 			yellowCats.push(myCats[i]);
 		}
-		
+
 	}
+
 	var mycatsbycolor = []
 	for(i=0;i<blueCats.length;i++){
 		mycatsbycolor.push(blueCats[i]);
@@ -205,9 +215,12 @@ router.get('/mycats/sortbycolor', function(req, res, next) {
 module.exports = router;
 
 catquantity = myCats.length
-var messagetext1 = "" 
-var messagetext2 = "" 
-var messagetext3 = "" 
+//its nice to have semi colons after each line. It make compresssing your code later on way easier
+var messagetext1 = ""
+var messagetext2 = ""
+var messagetext3 = ""
+// You could /n to add a line break in you string instead of having three variables
+
 if (catquantity > 20){
 	messagetext1 = "It is irresponsible to own more than 20 cats"
 	messagetext2 = "You cannot give each of them the love and attention they need"
@@ -229,7 +242,7 @@ router.get('/mycats/sendoldesttofarm', function(req, res, next){
 		oldestCat = myCats[numcats];
 		console.log("oldest cat");
 		console.log(oldestCat.name);
-		myCats = myCats.slice(0, -1); 
+		myCats = myCats.slice(0, -1);
 		console.log("my cats after farm");
 		console.log(myCats);
 		goodbyemessage1 = "Goodbye " + oldestCat.name + "!  " + oldestCat.name + " is off to a nice farm in the country."
@@ -281,9 +294,10 @@ module.exports = router;
 
 router.get('/mycats/:color/', function (req, res) {
 	var color = req.params.color;
-	CatModel.find({'color': color})	
+	CatModel.find({'color': color})
 		.exec(function (err, cats) {
 			if (err) {
+				//Error handling! Yay, everyone else forgets!
 				res.status(500).send("Error could not find cat");
 			} else {
 				if (cats.length > 0) {
