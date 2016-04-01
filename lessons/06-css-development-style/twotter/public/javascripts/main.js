@@ -66,7 +66,7 @@ $deleteButton.click(
 	}
 );
 
-
+//Interesting choice to not use passport.
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     console.log(response.authResponse.accessToken);
