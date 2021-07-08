@@ -4,7 +4,7 @@ var onSuccess = function(data, status) {
  //var img = "<img src='"+data+"'/>";
    if (!data) {
         alert("Error!");
-    } else {  
+    } else {
     $("#result").html();
     }
 
@@ -21,8 +21,8 @@ $form.submit(function(event) {
 
   var name = $form.find("[name='name']").val();
   var price = $form.find("[name='price']").val();
-  var inStock = $form.find("[name='inStock']").val();  
-  var customerName = $form.find("[name='customerName']").val(); 
+  var inStock = $form.find("[name='inStock']").val();
+  var customerName = $form.find("[name='customerName']").val();
   var price = $form.find("[value ='customerName']").val();
 
   formData = {

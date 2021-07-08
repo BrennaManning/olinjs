@@ -1,6 +1,6 @@
 var IngredientModel = require('../models/ingredientMongoose.js');
 var OrderModel = require('../models/orderMongoose.js');
- 
+
 var routes = {};
 
 routes.showOrders = function (req, res) {
@@ -10,7 +10,7 @@ routes.showOrders = function (req, res) {
                 res.status(500).send("Error no orders found");
             } else {
                 if (orders.length > 0) {
-                    res.render("kitchen", {"message": " Orders to fill:", orders});
+                    res.render("kitchen", {"message": " Orders to fill:", orders: orders});
                 } else {
                     res.render("kitchen", {"message": "All orders completed"});
                 }
